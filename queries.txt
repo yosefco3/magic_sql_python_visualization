@@ -1,0 +1,86 @@
+select 
+  count(Album.Title) as albums_number, 
+  Artist.name as artist 
+from 
+  Album 
+  inner join Artist on Album.ArtistId = Artist.ArtistId 
+group by 
+  artist 
+order by 
+  albums_number desc 
+limit 
+  10
+
+
+select 
+  count(Track.Name) as tracks_number, 
+  Genre.Name as genre_name 
+from 
+  Track 
+  inner join Genre on Track.GenreId = Genre.GenreId 
+group by 
+  Genre.Name 
+order by 
+  tracks_number desc 
+limit 
+  10
+
+
+
+select 
+  MediaType.Name as media_type, 
+  Track.Milliseconds 
+from 
+  Track 
+  inner join Genre on Track.GenreId = Genre.GenreId 
+  inner join MediaType on MediaType.MediaTypeId = Track.MediaTypeId
+
+
+select 
+  Playlist.Name as playlist_name, 
+  count(*) as tracks_number 
+from 
+  Track 
+  inner join PlaylistTrack on PlaylistTrack.TrackId = Track.TrackId 
+  inner join Playlist on Playlist.PlaylistId = PlaylistTrack.PlaylistId 
+group by 
+  Playlist.Name 
+order by 
+  tracks_number desc
+
+
+select 
+  Track.Name as track_name, 
+  count(*) as number_of_playlists 
+from 
+  Track 
+  inner join PlaylistTrack on PlaylistTrack.TrackId = Track.TrackId 
+  inner join Playlist on Playlist.PlaylistId = PlaylistTrack.PlaylistId 
+group by 
+  Track.Name
+
+
+select 
+  Track.Name as track_name, 
+  count(name) as number 
+from 
+  InvoiceLine 
+  inner join Invoice on InvoiceLine.InvoiceId = Invoice.InvoiceId 
+  inner join Track on Track.TrackId = InvoiceLine.TrackId 
+where 
+  BillingCountry = "USA" 
+group by 
+  name 
+order by 
+  number desc 
+limit 
+  10
+
+
+
+
+
+
+
+
+
